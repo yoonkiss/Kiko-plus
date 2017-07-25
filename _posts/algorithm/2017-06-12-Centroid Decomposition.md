@@ -1,0 +1,90 @@
+---
+layout: post
+title: Cut Vertex
+---
+### 용어 정리
+트리의 지름 - 트리에서 가장 긴 경로
+
+트리의 중심: n개의 노드로 구성된 트리에서 어떤 노드 u를 제거했을때, 쪼개지는 성분들의 사이즈가 n/2 을 넘지 않으면 u를 트리의 중심이라고 부른다.
+
+트리 또는 그래프에서 거리가 가장 먼 두 노드 사이의 거리를 "지름"이라 하고 이 지름의 중간에 해당하는 노드를 트리의 중심(center)으로 해서 트리를 재구성하면 높이(레벨)가 가장 작은 트리를 만들수 있다는 것입니다.
+
+중요한 성질 중 하나가 트리의 반지름과 트리의 중심은 트리의 지름 위에 있다는 것(겹친다는 것)인데, 트리의 중심은 트리의 지름에서 거리상으로(정점의 개수로 판단하는 것이 아님) 가운데에 있는 노드이다. 
+
+트리의 지름 구하는 법
+가장 긴 경로가 되려면 leaf node - leaf node이거나 root node - leaf node (이진트리가 해당)이여야 한다. 보통 leaf node - leaf node로 보면 된다.
+
+root node -leaf node 의 최대 길이 (트리 높이)
+싸이클이 없으므로 root에서 갈 수 있는 node의 최대 값 갱신
+
+int height(TreeNode* root) {
+int h = 0;
+
+for(int i = 0; i < root->children.size(); ++i)
+    h = max(h, 1 + height(root->children[i]));
+
+return h;
+}
+높이 구하는 걸 응용해 지름을 구할 수 있다.
+서브 트리 높이이를 정렬: O(NlogN)
+트리 순회와 다를 바 없어 O(N) 으로 간주
+
+int childSize[MAX_V];
+int child[MAX_V][MAX_V];
+int leafLongest;
+// root를 루트로 하는 서브 트리의 높이 계산
+int height(int root) {
+    // 각 자식을 루트로 하는 서브트리 높이 계산
+    vector<int> childHeights;
+    for(int i=0;i<childSize[root];i++)
+        childHeights.push_back(height(child[root][i]));
+    //  자식이 하나도 없다면 0을 반환
+    if(childHeights.size()==0)
+        return 0;
+    sort(childHeights.begin(), childHeights.end());
+    // root를 최상위 노드로 하는 경로를 고려
+    if(childHeights.size()==2)
+        leafLongest = max(leafLongest, childHeights[childHeights.size()-1] + childHeights[childHeights.size()-2] + 2);
+    // 트리 높이는 서브 트리 높이의 최대치에 1을 더한다
+    return childHeights[childHeights.size()-1] + 1;
+}
+// 두 노드 사이의 가장 긴 경로길이 계산
+int getLongest(int root) {
+    leafLongest = 0;
+    // 트리 높이와 최대 잎-잎 경로 길이 중 큰것을 선택
+    int h = height(root);
+    return max(leafLongest, h);
+}
+
+
+
+
+
+트리의 중심 구하는 법
+
+1. 임의의 노드 x를 고른다.
+2. x를 루트로 하고, 각 서브트리의 사이즈를 구해주는 dfs를 실행한다.
+3. 다음, x부터 시작해서 가장 큰 사이즈의 서브트리로 계속 옮겨가는데, 이때, 서브트리의 사이즈가 n/2을 넘는 동안만 옮겨다닌다.
+4. 최종적으로 도착한 노드가 바로 트리의 중심이 된다.
+
+
+
+{% highlight java %}
+원점 기준으로 벡터 B가 벡터 A의 반시계 방향이면 양수, 시계 방향이면 음수, 평행이면 0을 반환한다
+
+vector cross(vector A, vector B) { //외적
+  return vector(A.x * B.y - B.x * A.y)
+}
+ 
+double ccw(vector A, vector B) { //원점을 기준으로 CounterClockWise
+  return cross(A, B)
+}
+ 
+double ccw(vector base, vector A, vector B) { //base를 기준으로 ccw 판단
+  ccw (A - base, B - base)
+}
+ 
+{% endhighlight %}
+
+
+https://www.acmicpc.net/problem/5820
