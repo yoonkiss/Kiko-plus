@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Two pointer
+tags: [two pointer]
 ---
 
 int s = 0,e = 0, ans = 0;

@@ -2,6 +2,7 @@
 layout: post
 title: Edmonds-Karp algorithm for maximum flow problem
 category: [Algorithm]
+tags: [maximum flow]
 ---
 
 Flow networks

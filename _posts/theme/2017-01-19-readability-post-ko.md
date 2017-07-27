@@ -3,7 +3,7 @@ layout: post
 title: "한글 문서 가독성 테스트"
 description: "한글로 된 문서의 가독성을 테스트합니다."
 date: 2017-01-19
-tags: [샘플 포스트, 가독성, 테스트]
+tags: [style]
 comments: true
 share: true
 ---

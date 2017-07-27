@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Plane Sweeping
+tags: [geometry, sweeping]
 ---
 ### 북서풍
 맨 오른쪽 아래 섬 기준으로 x가 작으면서 y 가 큰것들의 개수 합을 구해가는 문제

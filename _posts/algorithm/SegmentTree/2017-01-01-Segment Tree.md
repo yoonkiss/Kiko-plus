@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Segment Tree
-category: [Algorithm]
+tags: [segment tree]
 ---
 - 자신보다 큰 수가 몇개냐!
 - 자신보다 작은 수가 몇개냐!

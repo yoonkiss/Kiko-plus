@@ -2,6 +2,7 @@
 layout: post
 title: Longest incresing subsequence
 category: [Algorithm]
+tags: [lis, segment tree, dp]
 ---
 
 1. n^2 dp LIS

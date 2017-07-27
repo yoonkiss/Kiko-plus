@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Cut Vertex
+tags: [graph]
 ---
 
 ### native
