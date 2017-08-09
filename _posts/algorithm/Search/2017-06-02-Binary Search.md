@@ -2,6 +2,7 @@
 layout: post
 title: Binary Search
 category: [Algorithm]
+tags: [binary search]
 ---
 
 정렬된 리스트에 어떤 수가 있는지 없는지를 조사한다.
