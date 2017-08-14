@@ -1,33 +1,16 @@
 ---
 layout: post
 title: Maximum subarray problem
-category: [Algorithm]
+tags: [dp, ta]
 ---
-O(N) 복잡도로 구현 (Kadane algorithm)
+### [Maximum Subarray](https://www.acmicpc.net/problem/10211)
 
-{% highlight java %}
-int cur_max = -200;
-int max = -200;
+> 연속한 수열에서 최대 합을 찾는 문제
+> 1 <= N <= 1000, -1000 <= arr[i] <= 1000
 
-int s = 0;
-int e = 0;
-int max_s = 0;
-int max_e = 0;
+`d[n] = max(d[n], d[n-1] + arr[n])`
 
-for (int i = 0; i < N; i++) {
-    if (A[i] < cur_max + A[i]) {
-        cur_max += A[i];
-        e = i;
-    } else {
-        cur_max = A[i];
-        s = i;
-        e = i;
-    }
-    if (max < cur_max) {
-        max = cur_max;
-        max_s = s;
-        max_e = e;
-    }
-}
 
-{% endhighlight %}
+복잡도: O(n) 
+
+대략적으로 존재하는 부분 문제의 수 x 한 부분 문제를 풀 때 필요한 반복문의 수행 횟수

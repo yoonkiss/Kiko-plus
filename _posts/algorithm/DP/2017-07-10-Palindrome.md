@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Palindrome
-tags: [dp]
+tags: [dp, ta]
 ---
 
 ### [팰린드롬?](https://www.acmicpc.net/problem/10942)

@@ -29,6 +29,3 @@ while (true) {
     }
 }
 ```
-
-## 기타
-http://blog.naver.com/PostView.nhn?blogId=kks227&logNo=220795165570
