@@ -1,7 +1,6 @@
 ---
 layout: post
-title: Longest incresing subsequence
-category: [Algorithm]
+title: 가장 큰 증가 부분 수열
 tags: [lis, segment tree, dp]
 ---
 ### [가장 큰 증가 부분 수열](https://www.acmicpc.net/problem/11053)
