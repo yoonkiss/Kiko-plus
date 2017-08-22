@@ -30,20 +30,7 @@ for( int i = 0; i < pointList.size() ; i ++ ){
 ### 여러 직사각형 전체 면적 구하기 
 https://www.acmicpc.net/problem/3392
 
-- 각각의 직사각형의 시작 면(왼쪽면)과 끝면(오른쪽 면)을 list에 담는다
-시작면 x1,y1,y2,1
-끝면 x2,y1,y2,-1
 
-- x축으로 오름차순 정렬
-
-- loop 0 < n
-> x를 하나 꺼내  면적을 구한다.
-(x - 이전 x) * 높이 ( tree root = tree[1] ) 트리는 y축범위의 개수를 표현
-> 꺼낸 면 y2-y1 의 길이 segment tree에 카운팅 (다음 면적을 구할 때 이용) 
-(tree node 범위는  y의 최대 값가지며 root는 범위의 합이다)
-
-node에 카운팅이 되어 있는데 중복으로 업데이트가 일어날 수 있다.
-lazy update 가 필요하다
 
 # pow using devide and conquer
 
