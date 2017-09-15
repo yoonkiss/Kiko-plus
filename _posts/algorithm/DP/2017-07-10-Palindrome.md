@@ -4,7 +4,12 @@ title: Palindrome
 tags: [dp, ta]
 ---
 
-### [팰린드롬?](https://www.acmicpc.net/problem/10942)
+## Problem
+
+[팰린드롬?](https://www.acmicpc.net/problem/10942)
+
+## Idea
+
 s와 e 구간의 수열이 palindrome 인지 판단하면 된다
 
 ``` cpp
