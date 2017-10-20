@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 굉장한 학생
-tags: ['segment tree']
+tags: ['segment tree', '3d']
 ---
 ## Problem
 

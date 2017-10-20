@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Largest Rectangle
-tags: [segment, 'divide and comquer']
+tags: ['segment tree', 'divide and comquer']
 ---
 ## Problem
 

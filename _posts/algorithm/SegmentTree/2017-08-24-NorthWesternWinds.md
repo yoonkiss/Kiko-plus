@@ -1,7 +1,7 @@
 ---
 layout: post
 title: North-Western Winds
-tags: [segment, compress]
+tags: ['segment tree', compress, 2d]
 ---
 ## Problem
 

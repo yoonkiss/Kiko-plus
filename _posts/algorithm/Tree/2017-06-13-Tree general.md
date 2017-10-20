@@ -1,9 +1,27 @@
 ---
 layout: post
-title: kth number
+title: Tree general
+tags: [tree]
 ---
+## Problem
 
-### 트리의 지름
+[트리](https://www.acmicpc.net/problem/1068)
+
+## Idea
+
+총 leaf개수를 구하고 삭제되는 노드가 가지는 leaf개수를 빼준다<br>
+
+이때 `sibling이 1개인 노드가 제거되는 경우`를 주의해야한다. 이때는 leaf가 1개 늘어나게 된다
+
+## 
+트리에서 (N-1 edge) 바이러스 (node)가 퍼지지 않도록 길을 끊는다면, 가능한 경우의 수는?
+
+N step에 adj edge들중 지울 것 지운다.
+남은 에지수 m에 대해 2^m을 구하는데 곱하기 할때 마다 % MOD
+O(N)
+
+
+
 트리: 사이클이 없는 무방향 그래프
 임의의 두 노드사이 경로는 1가지 뿐, 그냥 경로를 찾으면 된다.
 

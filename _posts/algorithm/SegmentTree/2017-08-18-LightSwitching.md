@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Light Switching
-tags: [segment]
+tags: ['segment tree', 'lazy propogation']
 ---
 ## Problem
 
