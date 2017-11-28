@@ -1,0 +1,31 @@
+### types
+
+undefined: a variable without a variable. the typeof is also undefined.
+
+var car; // value is undefined, type is undefined
+
+car = undefined; // value is undefined, type is undefined
+
+null: value doesn't exist but, type is an object
+
+var person = {}
+person = null; // value is null, type is object
+person = undefined; // value and type is undefined
+
+typeof undefined //undefined
+typeof null // object
+
+null and undefined are equal in value but, different in type
+
+null == undefined // true
+null === undefined // false
+
+### data type
+#### primitive data
+a single sime data value with no additional properites and methods;
+
+string
+number
+boolean
+undefined
+#### complex data

@@ -1,0 +1,39 @@
+
+### elements
+
+The HTML element (요소) is everything from the start tag to the end tag:
+
+start tag
+element content
+end tag
+
+ex: 
+<h1>	My First Heading	</h1>
+
+empty elements: do not have end tag like br tag ( "closed" <br />)
+
+h1: headings
+p: paragraph
+pre: defines pre-formatted text
+
+tag list: https://www.w3schools.com/tags/default.asp
+
+### attributes
+
+Attributes provide additional information about an elements
+
+usually come in name/value paires like: name="value"
+
+ex: a tag has href attribute, img tag has src, with and hight attributes.
+
+Global Attributes in HTML: https://www.w3schools.com/tags/default.asp
+Event Attributes in HTML: https://www.w3schools.com/tags/ref_eventattributes.asp
+
+
+
+<p id="demo">
+document.getElementById('demo').innerHTML
+
+<img id="myImage" src="pic_bulboff.gif" style="width:100px">
+
+document.getElementById('myImage').src=
