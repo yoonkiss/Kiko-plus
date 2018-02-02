@@ -55,3 +55,23 @@ thread별로 따로 메모리 풀을 두고 관리
 통화 중 기지국 간 이동을 원할하게 그대로 유지하는 기능
 
 * 송신량 자동 조절 기능 (Throttling)
+
+## 2장 간단예제
+
+* cube 생성 > 사이즈 늘리기
+* light  > 방향
+* sphere > rigidbody (물리법칙)
+* cube > component > physics > rigidbody > is kinematic check
+* prj > create > physic material > bounciness 설정
+* sphere > sphere collider > material > 위 재질을 추가 physic material drop
+* cube 도 마찮가지로 위 재질을 추가 physic material drop
+* 키 입력 스크립트작성 > cube에 추가
+* Scene save named "ball and cube" -> inserted to project view
+
+
+## 3 build for mobile
+
+조작성/디스플레이/처리능력 차이존재 vs PC
+
+가로화면 대응: 빌드 설정 Player Setting > resolution and presentation > default orientation > landscape
+기울기 입력대응: 판을 기울인다-> 가속센서 이용

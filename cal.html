@@ -1,0 +1,53 @@
+
+c++ : https://github.com/memononen/recastnavigation
+c# : https://github.com/Robmaister/SharpNav
+
+
+http://replay.unrealsummit.co.kr/data/summit2016/2016_14.pdf
+https://github.com/recastnavigation/recastnavigation
+https://www.youtube.com/watch?v=ZNiuORWncNE
+
+Recast는 언리얼 엔진에서 내비게이션 메시로 사용하고 있는오픈 소스 라이브러리입니다
+메쉬를 만들어주는 툴이라보면됨
+https://www.slideshare.net/KooKyeongWon/0903-recast
+https://github.com/jlalleve/rcdtcs
+
+Recast lib구조
+
+Recast: 이게 Recast의 본체. 내비게이션 메시를 생성하는 부분입니다.
+Detour는 실제로 Recast로 생성된 메시에서 길을 찾아주는 라이브러리입니다
+
+
+일반적으로 길을 찾는 데는 A*라고 불리는 알고리즘이 많이 사용됩니다.
+
+맵을 분석해서 그래프 형태로 나타낼 수만 있으면 된다는 겁니다
+
+https://assetstore.unity.com/packages/tools/ai/recastunity-recast-for-unity-7041
+
+reference
+MMOG Server-Side 충돌 및 이동처리 설계와 구현 https://www.slideshare.net/dgtman/mmog-36127621
+
+
+/////////////////
+m_remoteClients map에 담아
+
+## 시작
+클라이언트A가 로그인을 성공하면, 자기 캐릭터의 초기 위치를 서버에 알려주면서 "게임에 들어가겠다"를 알린다.
+서버는 이를 받으면 A에게 기존에 이미 있던 다른 캐릭터의 정보를 보내준다. 그리고 기존의 다른 클라이언트들에게 새로 들어온 클라이언트의 정보를 보내준다.
+클라이언트는 이를 받으면 게임 scene에 해당 캐릭터들을 추가한다.
+
+## 캐릭터 이동 동기화
+http://guide.nettention.com/cpp_ko#world_synch
+
+
+에니메이션
+Mechanim - Retargeting, State Machines
+
+Retargeting (에니메이션 대상 변경)
+- humanoid에 이 기능을 사용, 8등신 케릭터를 2등신 캐릭터에도 사용가능
+State Machiles (상태머신)
+- 에니메이션 상태전환
+
+플레이어
+
+
