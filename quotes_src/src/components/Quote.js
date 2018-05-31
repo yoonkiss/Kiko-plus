@@ -8,18 +8,35 @@ export default class Quote extends React.Component {
     toggleLike: React.PropTypes.func.isRequired
   };
 
+  constructor() {
+    super();
+    this.state = {
+      reveal: false,
+    };
+  }
+
+  componentWillReceiveProps() {
+    this.setState({reveal: false});
+  }
+
+  flip() {
+    this.setState({
+      reveal: !this.state.reveal,
+    });
+  }
+
   render() {
     const quote = this.props.quote,
           author = quote.author && (quote.author + (quote.interlocutor && ' to ' + quote.interlocutor)),
           date = quote.date;
 
+    const className = "card flip-container" + (this.state.reveal ? ' flip' : '');
     return (
       <div className="quote">
-        
         <div className="quote__meta-wrapper">
           <cite className="quote__meta">
             <span className="quote__meta-content">
-            { quote.question } <b>[{ author }]</b>{ author && quote.date ? ', ' : ' ' }{ date && format(date, 'DD/MM/YYYY') }
+              { quote.author ? (<b>{quote.author}</b>) : ('')} { quote.date ? ', ' : ' ' }{ date && format(date, 'DD/MM/YYYY') }
               <a href="#like"
                 onClick={ this.handleLike.bind(this) }
                 className={ 'quote__like' + (this.props.quote.liked ? ' liked' : '') }>
@@ -31,12 +48,17 @@ export default class Quote extends React.Component {
             </span>
           </cite>
         </div>
-        <blockquote className="quote__body">
-          { quote.text.map((sentence, i) => {
-            return (
-              <p key={ i }>{ sentence }</p>
-            );
-          }) }
+        <blockquote className="quote__body" onClick={this.flip.bind(this)}>
+        <div className="front" style={{display: this.state.reveal ? 'none' : ''}}>
+              {quote.question}
+              </div>
+              <div className="back"  style={{display: this.state.reveal ? '' : 'none'}}>
+              { quote.text.map((sentence, i) => {
+                return (
+                  <p key={ i }>{ sentence }</p>
+                );
+              }) }
+              </div>
         </blockquote>
       </div>
     );

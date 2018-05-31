@@ -73,6 +73,14 @@ class App extends Component {
     );
   }
 
+  nextQuestion() {
+    const random = this.state.quotes[Math.floor(Math.random() * this.state.quotes.length)];
+
+    this.setState({
+      random
+    });
+  }
+
   renderContent() {
     const quotes = this.state.quotes;
 
@@ -84,11 +92,14 @@ class App extends Component {
     else if (quotes.length) {
       return (
         <div className="page">
-          <h2>Randomly picked</h2>
           <Quote
             quote={ this.state.random }
             toggleLike={ this.toggleLike.bind(this) } />
-
+          <button 
+                className="nextButton" 
+                onClick={this.nextQuestion.bind(this)}>
+                next...
+              </button>
           <hr />
 
           <h2>{ this.state.quotes.length} quotes</h2>
