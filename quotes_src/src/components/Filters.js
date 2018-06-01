@@ -3,8 +3,8 @@ import React from 'react';
 export default class Filters extends React.Component {
 
   static propTypes = {
-    authors: React.PropTypes.array.isRequired,
-    setAuthor: React.PropTypes.func.isRequired,
+    categories: React.PropTypes.array.isRequired,
+    setCategory: React.PropTypes.func.isRequired,
     order: React.PropTypes.string.isRequired,
     setOrder: React.PropTypes.func.isRequired
   }
@@ -13,21 +13,20 @@ export default class Filters extends React.Component {
     return (
       <ul className="filters">
         <li>
-          <select value={ this.props.author } onChange={ this.handleAuthorChange.bind(this) }>
-            <option value="">Filter by poet</option>
-            { this.props.authors.map((author, i) => {
-              if (!author) { return false; };
+          <select value={ this.props.category } onChange={ this.handleCategoryChange.bind(this) }>
+            <option value="">Filter by category</option>
+            { this.props.categories.map((category, i) => {
+              if (!category) { return false; };
 
               return (
-                <option key={ i }>{ author }</option>
+                <option key={ i }>{ category }</option>
               );
             }) }
           </select>
         </li>
         <li>
           <select value={ this.props.order } onChange={ this.handleOrderChange.bind(this) }>
-            <option value="" disabled>Order by</option>
-            <option value="date">Date</option>
+            <option value="">Order by</option>
             <option value="likes">Popularity</option>
           </select>
         </li>
@@ -35,8 +34,8 @@ export default class Filters extends React.Component {
     );
   }
 
-  handleAuthorChange(e) {
-    this.props.setAuthor(e.target.value);
+  handleCategoryChange(e) {
+    this.props.setCategory(e.target.value);
   }
 
   handleOrderChange(e) {

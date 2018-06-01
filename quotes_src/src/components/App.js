@@ -15,10 +15,10 @@ class App extends Component {
     super(props);
 
     this.state = {
-      quotes: [],
+      items: [],
       random: {},
-      authors: [],
-      author: '',
+      categories: [],
+      category: '',
       order: 'date'
     }
   }
@@ -50,7 +50,7 @@ class App extends Component {
    */
   onLoad(data, error) {
     if (data) {
-      const random = data.quotes[Math.floor(Math.random() * data.quotes.length)];
+      const random = data.items[Math.floor(Math.random() * data.items.length)];
 
       this.setState({
         ...data,
@@ -74,7 +74,7 @@ class App extends Component {
   }
 
   nextQuestion() {
-    const random = this.state.quotes[Math.floor(Math.random() * this.state.quotes.length)];
+    const random = this.state.items[Math.floor(Math.random() * this.state.items.length)];
 
     this.setState({
       random
@@ -82,14 +82,14 @@ class App extends Component {
   }
 
   renderContent() {
-    const quotes = this.state.quotes;
+    const items = this.state.items;
 
     if (this.state.authenticated === false) {
       return (
         <button onClick={ this.authenticate.bind(this) } className="btn">Connect with Google</button>
       );
     }
-    else if (quotes.length) {
+    else if (items.length) {
       return (
         <div className="page">
           <Quote
@@ -102,23 +102,23 @@ class App extends Component {
               </button>
           <hr />
 
-          <h2>{ this.state.quotes.length} quotes</h2>
+          <h2>{ this.state.items.length} questions</h2>
           <Filters
-            authors={ this.state.authors }
-            author={ this.state.author }
-            setAuthor={ this.setAuthor.bind(this) }
+            categories={ this.state.categories }
+            category={ this.state.category }
+            setCategory={ this.setCategory.bind(this) }
             order={ this.state.order }
             setOrder={ this.setOrder.bind(this) } />
           <div className="quotes">
-            { quotes.map((quote, i) => {
-              if (this.state.author && quote.author !== this.state.author) {
+            { items.map((item, i) => {
+              if (this.state.category && item.category !== this.state.category) {
                 return false;
               }
 
               return (
                 <Quote
                   key={ i }
-                  quote={ quote }
+                  quote={ item }
                   toggleLike={ this.toggleLike.bind(this) } />
               );
             }) }
@@ -149,41 +149,41 @@ class App extends Component {
   /**
    * Filter by author
    */
-  setAuthor(author) {
+  setCategory(category) {
     this.setState({
-      author
+      category
     });
   }
 
   /**
-   * Change the order of the quotes
+   * Change the order of the items
    */
   setOrder(order) {
-    const quotes = orderBy(this.state.quotes, [order], ['desc']);
+    const items = orderBy(this.state.items, [order], ['desc']);
 
     this.setState({
-      quotes,
+      items,
       order
     });
   }
 
   /**
-   * Add or remove like on the quote
+   * Add or remove like on the item
    * The value is incremented/decremented into the spreadsheet
    * User owns likes are saved to its browser LocalStorage
    */
   toggleLike(q, save = true) {
-    const quotes = [...this.state.quotes],
-          index = quotes.indexOf(q),
-          quote = quotes[index],
+    const items = [...this.state.items],
+          index = items.indexOf(q),
+          item = items[index],
           userLikes = ls.get('likes') || [];
 
-    if (quote) {
-      const id = hash(quote.text);
+    if (item) {
+      const id = hash(item.question);
 
-      if (quote.liked) {
-        quote.likes--;
-        quote.liked = false;
+      if (item.liked) {
+        item.likes--;
+        item.liked = false;
 
         const index = userLikes.indexOf(id);
 
@@ -192,8 +192,8 @@ class App extends Component {
         }
       }
       else {
-        quote.likes++;
-        quote.liked = true;
+        item.likes++;
+        item.liked = true;
 
         if (id) {
           userLikes.push(id);
@@ -204,13 +204,13 @@ class App extends Component {
 
       // Update state immediately for instant visual feedback
       this.setState({
-        quotes
+        items
       }, () => {
         if (save) {
           // Now save the data to the spreadsheet
-          updateCell('E', quote.row, quote.likes, null, (error) => {
+          updateCell('E', item.row, item.likes, null, (error) => {
             // In case an error occured while saving, toggle the state back
-            this.toggleLike(quote, false);
+            this.toggleLike(item, false);
           });
         }
       });

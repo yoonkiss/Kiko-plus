@@ -50,14 +50,26 @@ export default class Quote extends React.Component {
         </div>
         <blockquote className="quote__body" onClick={this.flip.bind(this)}>
         <div className="front" style={{display: this.state.reveal ? 'none' : ''}}>
-              {quote.question}
-              </div>
-              <div className="back"  style={{display: this.state.reveal ? '' : 'none'}}>
-              { quote.text.map((sentence, i) => {
+              { quote.question.map((sentence, i) => {
                 return (
                   <p key={ i }>{ sentence }</p>
                 );
               }) }
+              </div>
+              <div className="back"  style={{display: this.state.reveal ? '' : 'none'}}>
+              { quote.answer.map((sentence, i) => {
+                return (
+                  <p key={ i }>{ sentence }</p>
+                );
+              }) }
+              <div>
+              { quote.keywords.map((sentence, i) => {
+                return (
+                  <p key={ i }>{ sentence }</p>
+                );
+              }) }
+              </div>
+
               </div>
         </blockquote>
       </div>

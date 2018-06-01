@@ -25,53 +25,46 @@ export function load(callback) {
   window.gapi.client.load('sheets', 'v4', () => {
     window.gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: config.spreadsheetId,
-      range: 'A2:E'
+      range: 'Casual!A2:E'
     }).then((response) => {
+      var range = response.result;
+
       const data = response.result.values || [],
-            authors = [];
+            categories = [];
 
-      let quotes = data.map((quote, i) => {
+      let items = data.map((cell, i) => {
         let row = i + 2, // Save row ID fore later update
-            date = quote[0],
-            dateParsed = Date.parse(date),
-            question = quote[1].split('\n'),
-            text = quote[2].split('\n'), // Split paragraphs
-            author = quote[3],
-            interlocutor = quote[4] || '',
-            likes = parseInt(quote[5], 10) || 0,
-            id = hash(text), // Generate an ID by hashing the quote
+            question = cell[0].split('\n'),
+            answer = cell[1].split('\n'),
+            category = cell[2],
+            keywords = (typeof cell[3] !== "undefined" && cell[3] !== null) ? cell[3].split('\n') : [] ,
+            likes = parseInt(cell[4], 10) || 0,
+            id = hash(question), // Generate an ID by hashing the quote
             liked = userLikes.indexOf(id) > -1 ? true : false;
-
-        // There might be no date or in an unrecognized format
-        if (!isNaN(dateParsed)) {
-          date = dateParsed;
-        }
-
         // Save an array of unique authors for the filters
-        if (authors.indexOf(author) === -1) {
-          authors.push(author);
+        if (categories.indexOf(category) === -1) {
+          categories.push(category);
         }
 
         return {
           row,
-          date,
           question,
-          text,
-          author,
-          interlocutor,
+          answer,
+          category,
+          keywords,
           likes,
           liked
         }
       });
 
       // Initially order quotes by date, most recent first
-      quotes = orderBy(quotes, ['date'], ['desc']);
+      //rows = orderBy(rows, ['date'], ['desc']);
       // And authors alphabetically
-      authors.sort();
+      //rows.sort();
 
       callback({
-        quotes,
-        authors
+        items,
+        categories
       });
     }, (response) => {
       callback(false, response.result.error);
@@ -85,7 +78,7 @@ export function load(callback) {
 export function updateCell(column, row, value, successCallback, errorCallback) {
   window.gapi.client.sheets.spreadsheets.values.update({
     spreadsheetId: config.spreadsheetId,
-    range: 'Sheet1!' + column + row,
+    range: 'Casual!' + column + row,
     valueInputOption: 'USER_ENTERED',
     values: [ [value] ]
   }).then(successCallback, errorCallback);
