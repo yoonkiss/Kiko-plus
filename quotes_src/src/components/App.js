@@ -15,6 +15,7 @@ class App extends Component {
     super(props);
 
     this.state = {
+      sheet: '',
       items: [],
       random: {},
       categories: [],
@@ -29,6 +30,16 @@ class App extends Component {
     });
   }
 
+  fetchSheetInfo(sheet) {
+    if (this.state.sheet !== sheet) {
+      this.setState({
+        sheet: sheet
+      }, () => {
+        checkAuth(true, this.handleAuth.bind(this));
+      });
+    }
+    
+  }
   /**
    * Check user authenification status and set app state accordingly
    */
@@ -37,7 +48,8 @@ class App extends Component {
       this.setState({
         authenticated: true
       });
-      load(this.onLoad.bind(this))
+      load(this.state.sheet, this.onLoad.bind(this));
+
     } else {
       this.setState({
         authenticated: false
@@ -65,12 +77,24 @@ class App extends Component {
   }
 
   render() {
+    console.log("render");
     return (
       <div className="app">
         <h3 className="brand">“Today's English”</h3>
+        <p>
+        <a href='#'  
+          onClick={ this.fetchSheetInfo.bind(this, 'Casual')}>
+          [Casual...]
+        </a>
+        <a href='#'  
+          onClick={ this.fetchSheetInfo.bind(this, 'Interview')}>
+          [Interview...]
+        </a>
+        </p>
         { this.renderContent() }
-      </div>
+        </div>
     );
+
   }
 
   nextQuestion() {
@@ -95,11 +119,13 @@ class App extends Component {
           <Quote
             quote={ this.state.random }
             toggleLike={ this.toggleLike.bind(this) } />
-          <button 
+              <button 
                 className="nextButton" 
                 onClick={this.nextQuestion.bind(this)}>
-                next...
+                Next...
               </button>
+              
+
           <hr />
 
           <h2>{ this.state.items.length} questions</h2>
@@ -155,6 +181,11 @@ class App extends Component {
     });
   }
 
+  setSheet(sheet, e) {
+    this.setState({
+      sheet: sheet
+    });
+  }
   /**
    * Change the order of the items
    */
@@ -208,7 +239,7 @@ class App extends Component {
       }, () => {
         if (save) {
           // Now save the data to the spreadsheet
-          updateCell('E', item.row, item.likes, null, (error) => {
+          updateCell(this.state.sheet, 'E', item.row, item.likes, null, (error) => {
             // In case an error occured while saving, toggle the state back
             this.toggleLike(item, false);
           });
@@ -219,4 +250,7 @@ class App extends Component {
 
 }
 
+App.defaultProps = {
+  sheet: 'Casual'
+};
 export default App;

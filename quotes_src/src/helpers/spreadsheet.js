@@ -19,13 +19,13 @@ export function checkAuth(immediate, callback) {
  * Load the quotes from the spreadsheet
  * Embellish them with user own likes
  */
-export function load(callback) {
+export function load(sheet, callback) {
   let userLikes = get('likes') || [];
 
   window.gapi.client.load('sheets', 'v4', () => {
     window.gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: config.spreadsheetId,
-      range: 'Casual!A2:E'
+      range: sheet+'!A2:E'
     }).then((response) => {
       var range = response.result;
 
@@ -75,10 +75,10 @@ export function load(callback) {
 /**
  * Update a single cell value
  */
-export function updateCell(column, row, value, successCallback, errorCallback) {
+export function updateCell(sheet, column, row, value, successCallback, errorCallback) {
   window.gapi.client.sheets.spreadsheets.values.update({
     spreadsheetId: config.spreadsheetId,
-    range: 'Casual!' + column + row,
+    range: sheet+'!' + column + row,
     valueInputOption: 'USER_ENTERED',
     values: [ [value] ]
   }).then(successCallback, errorCallback);
