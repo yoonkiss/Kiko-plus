@@ -65,7 +65,7 @@ nav:
   - name:           "Tags"
     url:            "/tags"
   - name:           "Flashcard"
-    url:            "http://flashcard-flashcard.193b.starter-ca-central-1.openshiftapps.com/general"
+    url:            "http://murmuring-beach-89958.herokuapp.com/eng"
 
 # Sass
 sass:
